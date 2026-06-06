@@ -1,0 +1,1 @@
+import{j as e}from"./index-BL7ldoJZ.js";function a(){return e.jsxs("main",{className:"mx-auto max-w-6xl p-6",children:[e.jsx("h1",{className:"text-3xl font-bold text-surface-900 dark:text-white",children:"Perfil"}),e.jsx("p",{className:"mt-4 text-surface-600 dark:text-surface-300",children:"Aquí podrás ver y editar tu información de usuario."})]})}export{a as default};

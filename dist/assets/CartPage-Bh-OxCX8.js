@@ -1,0 +1,1 @@
+import{j as t}from"./index-BL7ldoJZ.js";function e(){return t.jsxs("main",{className:"mx-auto max-w-6xl p-6",children:[t.jsx("h1",{className:"text-3xl font-bold text-surface-900 dark:text-white",children:"Carrito"}),t.jsx("p",{className:"mt-4 text-surface-600 dark:text-surface-300",children:"Revisa tus productos y gestiona tu pedido antes de pagar."})]})}export{e as default};

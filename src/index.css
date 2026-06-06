@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-surface-900 dark:bg-surface-950 dark:text-white;
+  }
+
+  /* Scrollbar discreta */
+  ::-webkit-scrollbar        { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track  { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb  { @apply rounded-full bg-surface-300 dark:bg-surface-700; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-surface-400 dark:bg-surface-600; }
+}
+
+/* ─── Components ────────────────────────────────────────────────────────────── */
+@layer components {
+  /* Contenedor de página estándar */
+  .page-container {
+    @apply mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 animate-fade-in;
+  }
+
+  /* Sección con padding vertical generoso */
+  .section {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  /* Focus ring accesible */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  }
+
+  /* Card base */
+  .card {
+    @apply rounded-2xl border border-surface-100 bg-white shadow-card
+           dark:border-surface-800 dark:bg-surface-900;
+  }
+
+  /* Shimmer skeleton */
+  .skeleton {
+    @apply animate-shimmer rounded-lg bg-gradient-to-r
+           from-surface-200 via-surface-100 to-surface-200
+           bg-[length:700px_100%]
+           dark:from-surface-800 dark:via-surface-700 dark:to-surface-800;
+  }
+}
+
+/* ─── Utilities ─────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance  { text-wrap: balance; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar  { -ms-overflow-style: none; scrollbar-width: none; }
+}
