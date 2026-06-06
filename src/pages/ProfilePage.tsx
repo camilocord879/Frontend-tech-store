@@ -148,8 +148,8 @@ export default function ProfilePage() {
           </h3>
           <ul className="space-y-2 text-sm text-surface-500 dark:text-surface-400">
             <li>El rol no se puede actualizar desde esta pantalla.</li>
-            <li>El usuario se actualizará en tu sesión y en Supabase/Prisma si tu backend lo permite.</li>
-            <li>Si tu backend devuelve errores, los verás con mensajes claros.</li>
+            <li>El teléfono es opcional, pero si se ingresa debe tener exactamente 10 dígitos numéricos.</li>
+            <li>Los cambios se guardan al hacer clic en "Guardar cambios".</li>
           </ul>
         </div>
       </div>
