@@ -175,7 +175,7 @@ function CartItemRow({ item, onUpdate, onRemove, isLoading }: CartItemRowProps) 
       {/* Imagen */}
       <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-surface-100 dark:bg-surface-800">
         <img
-          src={getImageUrl(item.product.imageUrl)}
+          src={getImageUrl(item.product.image)}
           alt={item.product.name}
           className="h-full w-full object-cover"
           onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder-product.svg' }}

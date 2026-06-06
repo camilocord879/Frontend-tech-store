@@ -43,9 +43,8 @@ const productSchema = z.object({
     .string()
     .min(2, 'Mínimo 2 caracteres')
     .max(50, 'Máximo 50 caracteres'),
-  imageUrl: z
+  image: z
     .string()
-    .url('Debe ser una URL válida')
     .optional()
     .or(z.literal('')),
   featured: z.boolean().optional(),
@@ -225,7 +224,7 @@ function AdminProductCard({ product, onEdit, onDelete, deletingId }: AdminProduc
       {/* Imagen */}
       <div className="relative bg-surface-100 dark:bg-surface-800" style={{ paddingTop: '60%' }}>
         <img
-          src={getImageUrl(product.imageUrl)}
+          src={getImageUrl(product.image)}
           alt={product.name}
           className="absolute inset-0 h-full w-full object-cover"
           onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder-product.svg' }}
@@ -313,19 +312,19 @@ function ProductModal({ product, onClose, onSaved }: ProductModalProps) {
           price:       product.price,
           stock:       product.stock,
           category:    product.category,
-          imageUrl:    product.imageUrl ?? '',
+          image:       product.image ?? '',
           featured:    product.featured ?? false,
         }
       : { featured: false, stock: 0 },
   })
 
-  const imageUrlValue = watch('imageUrl')
+  const imageUrlValue = watch('image')
 
   const onSubmit = async (data: ProductFormData) => {
     try {
       const payload = {
         ...data,
-        imageUrl: data.imageUrl || undefined,
+        image: data.image || undefined,
       }
 
       let saved: Product
@@ -454,23 +453,23 @@ function ProductModal({ product, onClose, onSaved }: ProductModalProps) {
             </div>
           </FormField>
 
-          {/* URL de imagen */}
-          <FormField label="URL de imagen" error={errors.imageUrl?.message}>
+          {/* Nombre de imagen */}
+          <FormField label="Nombre de imagen" error={errors.image?.message}>
             <div className="relative">
               <Image size={14} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-surface-400" />
               <input
-                {...register('imageUrl')}
-                type="url"
-                placeholder="https://ejemplo.com/imagen.jpg"
-                className={inputCls(!!errors.imageUrl)}
+                {...register('image')}
+                type="text"
+                placeholder="imagen1.webp"
+                className={inputCls(!!errors.image)}
                 style={{ paddingLeft: '2.25rem' }}
               />
             </div>
             {/* Preview de imagen */}
-            {imageUrlValue && !errors.imageUrl && (
+            {imageUrlValue && !errors.image && (
               <div className="mt-2 overflow-hidden rounded-xl border border-surface-200 dark:border-surface-700">
                 <img
-                  src={imageUrlValue}
+                  src={`/image/${imageUrlValue}`}
                   alt="Preview"
                   className="h-32 w-full object-cover"
                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
@@ -598,8 +597,3 @@ function inputCls(hasError: boolean) {
 }
 
 // Necesario para useEffect dentro de ProductModal sin hooks condicionales
-function useEffect(effect: () => (() => void) | void, deps: unknown[]) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return (window as unknown as { React: { useEffect: typeof import('react').useEffect } })
-    .React?.useEffect(effect, deps) ?? import('react').then(({ useEffect: ue }) => ue(effect, deps as never))
-}

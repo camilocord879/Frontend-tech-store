@@ -91,7 +91,7 @@ export default function ProductPage() {
         {/* Imagen */}
         <div className="relative overflow-hidden rounded-2xl bg-surface-100 dark:bg-surface-800 aspect-square">
           <img
-            src={getImageUrl(product.imageUrl)}
+            src={getImageUrl(product.image)}
             alt={product.name}
             className="h-full w-full object-cover"
             onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder-product.svg' }}

@@ -47,7 +47,7 @@ export interface Product {
   description: string
   price: number
   stock: number
-  imageUrl?: string | null
+  image?: string | null
   category: string
   featured?: boolean
   createdAt?: string

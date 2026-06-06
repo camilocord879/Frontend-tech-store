@@ -216,7 +216,7 @@ function ProductCard({ product, onAddToCart, cartLoading }: ProductCardProps) {
       <Link to={`/products/${product.id}`} className="block">
         <div className="relative overflow-hidden bg-surface-100 dark:bg-surface-800" style={{ paddingTop: '72%' }}>
           <img
-            src={getImageUrl(product.imageUrl)}
+            src={getImageUrl(product.image)}
             alt={product.name}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder-product.svg' }}
