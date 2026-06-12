@@ -83,8 +83,6 @@ export default function RegisterPage() {
         email:     data.email,
         phone:     data.phone,
         password:  data.password,
-        confirmPassword: data.confirmPassword,
-    
       })
       toast.success(`¡Bienvenido, ${data.firstName}!`)
       navigate('/home')

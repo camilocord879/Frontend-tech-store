@@ -90,6 +90,27 @@ export interface UpdateCartItemPayload {
   quantity: number
 }
 
+export type OrderStatus = 'PENDING' | 'PAID' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED'
+
+export interface OrderItem {
+  id: string
+  orderId: string
+  productId: string
+  product: Product
+  quantity: number
+  unitPrice: number
+}
+
+export interface Order {
+  id: string
+  userId: string
+  total: number
+  status: OrderStatus
+  items: OrderItem[]
+  createdAt: string
+  updatedAt?: string
+}
+
 // ─── API genérica ─────────────────────────────────────────────────────────────
 
 export interface ApiError {

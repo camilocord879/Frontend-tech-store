@@ -18,6 +18,7 @@ const ProductsPage   = lazy(() => import('@/pages/ProductsPage'))
 const ProductPage    = lazy(() => import('@/pages/ProductPage'))
 const CartPage       = lazy(() => import('@/pages/CartPage'))
 const ProfilePage    = lazy(() => import('@/pages/ProfilePage'))
+const MyOrdersPage   = lazy(() => import('@/pages/MyOrdersPage'))
 const AdminProductsPage = lazy(() => import('@/pages/AdminProductPage'))
 const NotFoundPage   = lazy(() => import('@/pages/NotFoundPage'))
 
@@ -56,6 +57,7 @@ export function AppRouter() {
             <Route element={<ProtectedRoute />}>
               <Route path="cart"    element={<CartPage />} />
               <Route path="profile" element={<ProfilePage />} />
+              <Route path="my-orders" element={<MyOrdersPage />} />
             </Route>
 
             {/* Admin */}
