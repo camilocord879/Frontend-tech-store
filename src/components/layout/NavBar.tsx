@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import {
   ShoppingCart, Sun, Moon, User, Menu, X, Zap, Search,
+  LayoutDashboard, Package, ClipboardList, Users, ShoppingBag
 } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { useTheme } from '@/contexts/ThemeContext'
@@ -33,7 +34,8 @@ export function Navbar() {
   const navLinks = [
     { to: '/home',     label: 'Inicio' },
     { to: '/products', label: 'Productos' },
-    ...(user?.role === 'ADMIN' ? [{ to: '/admin/products', label: 'Admin' }] : []),
+    { to: '/contact',  label: 'Contacto' },
+    ...(user?.role === 'ADMIN' ? [{ to: '/admin/dashboard', label: 'Admin' }] : []),
   ]
 
   return (
@@ -129,17 +131,59 @@ export function Navbar() {
                 <span className="hidden sm:block">Cuenta</span>
               </button>
               {/* Dropdown */}
-              <div className="invisible absolute right-0 top-full z-50 mt-1.5 w-44 origin-top-right scale-95 rounded-xl border border-surface-200 bg-white py-1 opacity-0 shadow-card-md transition-all group-hover:visible group-hover:scale-100 group-hover:opacity-100 dark:border-surface-700 dark:bg-surface-900">
+              <div className="invisible absolute right-0 top-full z-50 mt-1.5 w-52 origin-top-right scale-95 rounded-xl border border-surface-200 bg-white py-2 opacity-0 shadow-card-lg transition-all group-hover:visible group-hover:scale-100 group-hover:opacity-100 dark:border-surface-700 dark:bg-surface-900">
+                <div className="px-4 py-1.5 text-xs font-semibold text-surface-400 dark:text-surface-500 border-b border-surface-100 dark:border-surface-800 mb-1">
+                  Hola, {user.firstName}
+                </div>
                 <Link
                   to="/profile"
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm text-surface-700 hover:bg-surface-50 dark:text-surface-300 dark:hover:bg-surface-800"
+                  className="flex items-center gap-2 px-4 py-2 text-sm text-surface-700 hover:bg-surface-50 dark:text-surface-300 dark:hover:bg-surface-800"
                 >
                   <User size={14} /> Mi perfil
                 </Link>
-                <hr className="my-1 border-surface-100 dark:border-surface-800" />
+                <Link
+                  to="/orders"
+                  className="flex items-center gap-2 px-4 py-2 text-sm text-surface-700 hover:bg-surface-50 dark:text-surface-300 dark:hover:bg-surface-800"
+                >
+                  <ShoppingBag size={14} /> Mis pedidos
+                </Link>
+                
+                {user?.role === 'ADMIN' && (
+                  <>
+                    <div className="px-4 py-1 mt-2 text-[10px] font-bold uppercase tracking-wider text-primary-500 dark:text-primary-400">
+                      Administración
+                    </div>
+                    <Link
+                      to="/admin/dashboard"
+                      className="flex items-center gap-2 px-4 py-1.5 text-sm text-surface-700 hover:bg-surface-50 dark:text-surface-300 dark:hover:bg-surface-800"
+                    >
+                      <LayoutDashboard size={14} /> Dashboard
+                    </Link>
+                    <Link
+                      to="/admin/products"
+                      className="flex items-center gap-2 px-4 py-1.5 text-sm text-surface-700 hover:bg-surface-50 dark:text-surface-300 dark:hover:bg-surface-800"
+                    >
+                      <Package size={14} /> Productos
+                    </Link>
+                    <Link
+                      to="/admin/orders"
+                      className="flex items-center gap-2 px-4 py-1.5 text-sm text-surface-700 hover:bg-surface-50 dark:text-surface-300 dark:hover:bg-surface-800"
+                    >
+                      <ClipboardList size={14} /> Pedidos
+                    </Link>
+                    <Link
+                      to="/admin/users"
+                      className="flex items-center gap-2 px-4 py-1.5 text-sm text-surface-700 hover:bg-surface-50 dark:text-surface-300 dark:hover:bg-surface-800"
+                    >
+                      <Users size={14} /> Usuarios
+                    </Link>
+                  </>
+                )}
+                
+                <hr className="my-1.5 border-surface-100 dark:border-surface-800" />
                 <button
                   onClick={logout}
-                  className="w-full px-4 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+                  className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
                 >
                   Cerrar sesión
                 </button>

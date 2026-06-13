@@ -55,13 +55,13 @@ type ProductFormData = z.infer<typeof productSchema>
 // ─── Componente principal ─────────────────────────────────────────────────────
 export default function AdminProductsPage() {
   const { user } = useAuth()
-  const navigate  = useNavigate()
+  const navigate = useNavigate()
 
-  const [products, setProducts]       = useState<Product[]>([])
+  const [products, setProducts] = useState<Product[]>([])
   const [loadingList, setLoadingList] = useState(true)
-  const [modalOpen, setModalOpen]     = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
-  const [deletingId, setDeletingId]   = useState<string | null>(null)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<Product | null>(null)
 
   // ── Guardia de rol en el frontend ─────────────────────────────────────────
@@ -307,14 +307,14 @@ function ProductModal({ product, onClose, onSaved }: ProductModalProps) {
     resolver: zodResolver(productSchema),
     defaultValues: isEditing
       ? {
-          name:        product.name,
-          description: product.description,
-          price:       product.price,
-          stock:       product.stock,
-          category:    product.category,
-          image:       product.image ?? '',
-          featured:    product.featured ?? false,
-        }
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        stock: product.stock,
+        category: product.category,
+        image: product.image ?? '',
+        featured: product.featured ?? false,
+      }
       : { featured: false, stock: 0 },
   })
 

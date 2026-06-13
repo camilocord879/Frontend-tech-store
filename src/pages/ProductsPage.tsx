@@ -215,6 +215,8 @@ function ProductCard({ product, onAddToCart, cartLoading }: ProductCardProps) {
       {/* Imagen */}
       <Link to={`/products/${product.id}`} className="block">
         <div className="relative overflow-hidden bg-surface-100 dark:bg-surface-800" style={{ paddingTop: '72%' }}>
+          console.log(product.image)
+          console.log(getImageUrl(product.image))
           <img
             src={getImageUrl(product.image)}
             alt={product.name}
