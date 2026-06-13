@@ -20,9 +20,6 @@ export default function CartPage() {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { cart, summary, isLoading, fetchCart, updateItem, removeItem, clearCart } = useCartStore()
-  const [isCheckingOut, setIsCheckingOut] = useState(false)
-  const [confirmedOrder, setConfirmedOrder] = useState<Order | null>(null)
-
   // Cargar carrito al montar
   useEffect(() => {
     fetchCart()
@@ -46,18 +43,8 @@ export default function CartPage() {
     }
   }
 
-  const handleCheckout = async () => {
-    setIsCheckingOut(true)
-    try {
-      const order = await orderService.createOrder()
-      clearCart()
-      setConfirmedOrder(order)
-      toast.success('Compra finalizada correctamente')
-    } catch (error) {
-      toast.error(extractErrorMessage(error, 'No se pudo finalizar la compra'))
-    } finally {
-      setIsCheckingOut(false)
-    }
+  const handleCheckout = () => {
+    navigate('/checkout')
   }
 
   // ── Loading inicial ────────────────────────────────────────────────────────
@@ -70,51 +57,6 @@ export default function CartPage() {
   }
 
   const items = cart?.items ?? []
-
-  if (confirmedOrder) {
-    return (
-      <div className="page-container">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-green-50 p-8 text-center shadow-card-md dark:border-green-900/40 dark:bg-green-900/20">
-          <CheckCircle2 className="mx-auto text-green-600 dark:text-green-400" size={56} />
-          <h1 className="mt-5 text-3xl font-bold text-surface-900 dark:text-white">
-            Compra confirmada
-          </h1>
-          <p className="mt-3 text-sm text-surface-600 dark:text-surface-300">
-            Tu pedido #{confirmedOrder.id.slice(0, 8)} fue creado correctamente.
-          </p>
-          <div className="mt-6 rounded-xl bg-white p-4 dark:bg-surface-900">
-            <div className="flex justify-between text-sm text-surface-500 dark:text-surface-400">
-              <span>Estado</span>
-              <span className="font-semibold text-surface-900 dark:text-white">
-                {confirmedOrder.status}
-              </span>
-            </div>
-            <div className="mt-3 flex justify-between text-base font-semibold text-surface-900 dark:text-white">
-              <span>Total</span>
-              <span className="text-primary-600 dark:text-primary-400">
-                {formatPrice(confirmedOrder.total)}
-              </span>
-            </div>
-          </div>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <button
-              type="button"
-              onClick={() => navigate('/my-orders')}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-700"
-            >
-              Ver mis pedidos <ArrowRight size={15} />
-            </button>
-            <Link
-              to="/products"
-              className="inline-flex items-center justify-center rounded-xl border border-surface-200 px-6 py-3 text-sm font-semibold text-surface-700 transition-colors hover:bg-surface-50 dark:border-surface-700 dark:text-surface-200 dark:hover:bg-surface-800"
-            >
-              Seguir comprando
-            </Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="page-container">
@@ -196,18 +138,9 @@ export default function CartPage() {
               <button
                 className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 py-3 text-sm font-semibold text-white hover:bg-primary-700 active:bg-primary-800 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
                 onClick={handleCheckout}
-                disabled={isCheckingOut || isLoading}
+                disabled={isLoading}
               >
-                {isCheckingOut ? (
-                  <>
-                    <Loader2 className="animate-spin" size={15} />
-                    Finalizando compra
-                  </>
-                ) : (
-                  <>
-                    Finalizar compra <ArrowRight size={15} />
-                  </>
-                )}
+                Continuar al checkout <ArrowRight size={15} />
               </button>
 
               <Link

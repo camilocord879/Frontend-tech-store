@@ -33,18 +33,25 @@ export function truncate(text: string, maxLength: number): string {
 export const PLACEHOLDER_PRODUCT_IMAGE = '/placeholder-product.svg'
 
 /** Devuelve un placeholder cuando image es nulo */
-export function getImageUrl(image?: string | null, fallback = PLACEHOLDER_PRODUCT_IMAGE): string {
-  if (!image || image.trim() === '') return fallback
-  
-  // Extrae el nombre del archivo si viene una URL completa
-  const fileName = image.includes('/') ? image.split('/').pop() : image
-  
-  // Devuelve la ruta local en la carpeta public/image
-  if (fileName) {
-    return `/image/${fileName}`
+export function getImageUrl(
+  image?: string | null,
+  fallback = PLACEHOLDER_PRODUCT_IMAGE
+): string {
+
+  if (!image || image.trim() === '') {
+    return fallback
   }
-  
-  return fallback
+
+  // URL externa
+  if (
+    image.startsWith('http://') ||
+    image.startsWith('https://')
+  ) {
+    return image
+  }
+
+  // Imagen local
+  return `/image/${image}`
 }
 
 /** Normaliza mensajes de error de Zod para mostrar texto legible */

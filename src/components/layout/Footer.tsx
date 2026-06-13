@@ -8,7 +8,7 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   const links = {
-    Tienda:   [{ to: '/products', label: 'Productos' }, { to: '/home', label: 'Inicio' }],
+    Tienda:   [{ to: '/products', label: 'Productos' }, { to: '/home', label: 'Inicio' }, { to: '/contact', label: 'Contacto' }],
     Cuenta:   [{ to: '/login', label: 'Iniciar sesión' }, { to: '/register', label: 'Registrarse' }, { to: '/profile', label: 'Mi perfil' }],
     Legal:    [{ to: '#', label: 'Términos y condiciones' }, { to: '#', label: 'Política de privacidad' }],
   }

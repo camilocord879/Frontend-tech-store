@@ -18,4 +18,12 @@ export const orderService = {
     const { data } = await api.get<Order>(`${ORDERS}/${orderId}`)
     return data
   },
+
+  /** Obtiene la factura en formato PDF (Blob) */
+  async getInvoiceBlob(orderId: string): Promise<Blob> {
+    const { data } = await api.get<Blob>(`${ORDERS}/${orderId}/invoice`, {
+      responseType: 'blob',
+    })
+    return data
+  },
 }

@@ -69,7 +69,7 @@ export default function ProductPage() {
   if (!product) return null
 
   const outOfStock = product.stock === 0
-  const lowStock   = product.stock > 0 && product.stock <= 5
+  const lowStock = product.stock > 0 && product.stock <= 5
 
   return (
     <div className="page-container">
@@ -90,6 +90,8 @@ export default function ProductPage() {
 
         {/* Imagen */}
         <div className="relative overflow-hidden rounded-2xl bg-surface-100 dark:bg-surface-800 aspect-square">
+          console.log(product.image)
+          console.log(getImageUrl(product.image))
           <img
             src={getImageUrl(product.image)}
             alt={product.name}
