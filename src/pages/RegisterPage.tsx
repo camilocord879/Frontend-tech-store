@@ -60,7 +60,7 @@ export default function RegisterPage() {
   const { register: registerUser } = useAuth()
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
-  const [showConfirm, setShowConfirm]   = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
 
   const {
     register,
@@ -78,11 +78,12 @@ export default function RegisterPage() {
     try {
       await registerUser({
         firstName: data.firstName,
-        lastName:  data.lastName,
-        username:  data.username,
-        email:     data.email,
-        phone:     data.phone,
-        password:  data.password,
+        lastName: data.lastName,
+        username: data.username,
+        email: data.email,
+        phone: data.phone,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
       })
       toast.success(`¡Bienvenido, ${data.firstName}!`)
       navigate('/home')
@@ -96,14 +97,14 @@ export default function RegisterPage() {
   const getPasswordStrength = (pwd: string) => {
     if (!pwd) return { level: 0, label: '', color: '' }
     let score = 0
-    if (pwd.length >= 6)  score++
+    if (pwd.length >= 6) score++
     if (pwd.length >= 10) score++
     if (/[A-Z]/.test(pwd)) score++
     if (/[0-9]/.test(pwd)) score++
     if (/[^a-zA-Z0-9]/.test(pwd)) score++
-    if (score <= 1) return { level: 1, label: 'Débil',    color: 'bg-red-500' }
-    if (score <= 3) return { level: 2, label: 'Regular',  color: 'bg-yellow-500' }
-    return              { level: 3, label: 'Fuerte',   color: 'bg-green-500' }
+    if (score <= 1) return { level: 1, label: 'Débil', color: 'bg-red-500' }
+    if (score <= 3) return { level: 2, label: 'Regular', color: 'bg-yellow-500' }
+    return { level: 3, label: 'Fuerte', color: 'bg-green-500' }
   }
 
   const strength = getPasswordStrength(passwordValue)
@@ -281,9 +282,8 @@ export default function RegisterPage() {
                     {[1, 2, 3].map((lvl) => (
                       <div
                         key={lvl}
-                        className={`h-1 flex-1 rounded-full transition-all duration-300 ${
-                          strength.level >= lvl ? strength.color : 'bg-surface-200 dark:bg-surface-700'
-                        }`}
+                        className={`h-1 flex-1 rounded-full transition-all duration-300 ${strength.level >= lvl ? strength.color : 'bg-surface-200 dark:bg-surface-700'
+                          }`}
                       />
                     ))}
                   </div>
@@ -349,8 +349,8 @@ export default function RegisterPage() {
               {isSubmitting ? (
                 <>
                   <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                   </svg>
                   Creando cuenta…
                 </>
